@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+	
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ujian Genap</title>
+	</head>
+	
+	<body>
+		<script>
+		
+		let totalTransaksi = 0; 
+		let totalDiskon = 0;    
+
+		let n = parseInt(prompt("Masukkan jumlah transaksi:"));
+
+		for (let i = 1; i <= n; i++) {
+			let jenisBaju = prompt("Transaksi ke-" + i + "\nJenis baju:");
+			let hargaSatuan = parseInt(prompt("Harga satuan:"));
+			let jumlahBaju = parseInt(prompt("Jumlah baju dibeli:")); // Harus angka
+			let sesi = prompt("Sesi pembelian (Pagi/Siang/Malam):");
+
+			let totalHargaTransaksi = hargaSatuan * jumlahBaju;
+			let diskon = 0;
+
+			// Logika Sesi Pagi
+			if (sesi === "Pagi") {
+				if (jumlahBaju <= 10) {
+					diskon = 0;
+				} else if (jumlahBaju <= 20) {
+					diskon = (10 * hargaSatuan * 0.05) + ((jumlahBaju - 10) * hargaSatuan * 0.10);
+				} else {
+					diskon = (10 * hargaSatuan * 0.05) + (10 * hargaSatuan * 0.12) + ((jumlahBaju - 20) * hargaSatuan * 0.22);
+				}
+			} 
+			//Sesi Malam
+				else if (sesi === "Malam") {
+				if (jumlahBaju <= 10) {
+					diskon = totalHargaTransaksi * 0.05;
+				} else if (jumlahBaju <= 20) {
+					diskon = (10 * hargaSatuan * 0.10) + ((jumlahBaju - 10) * hargaSatuan * 0.18);
+				} else {
+					diskon = (10 * hargaSatuan * 0.10) + (10 * hargaSatuan * 0.18) + ((jumlahBaju - 20) * hargaSatuan * 0.25);
+				}
+			} 
+			// Sesi Siang
+			else {
+				diskon = 0;
+			}
+
+			let bayarTotal = totalHargaTransaksi - diskon;
+
+			// Update Rekap
+			totalTransaksi += bayarTotal;
+			totalDiskon += diskon;
+
+			// Output per transaksi
+			console.log(`=== Transaksi ke-${i} ===`);
+			console.log(`Jenis Baju: ${jenisBaju}`);
+			console.log(`Sesi: ${sesi}`);
+			console.log(`Total Harga: Rp ${totalHargaTransaksi}`);
+			console.log(`Diskon: Rp ${diskon}`);
+			console.log(`Total Bayar: Rp ${bayarTotal}`);
+		}
+
+			// Rekap Akhir
+			console.log(`\n=== REKAP AKHIR PENJUALAN ===`);
+			console.log(`Total Transaksi: ${n}`);
+			console.log(`Total Diskon: Rp ${totalDiskon}`);
+			console.log(`Total Pendapatan: Rp ${totalTransaksi}`);
+			console.log(`Rata-rata: Rp ${totalTransaksi / n}`);
+</script>
+		
+	</body>
+</html>
